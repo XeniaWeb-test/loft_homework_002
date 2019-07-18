@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Задание #1
  * Функция должна принимать массив строк и выводить каждую строку в отдельном параграфе (тег <p>)
@@ -69,7 +70,7 @@ function task2($operator, ...$items)
             echo 'Неизвестное действие: ';
             $result = null;
     }
-    echo 'результат = ' . $result;
+    echo 'результат = ' . $result . PHP_EOL;
     return $result;
 }
 
@@ -89,14 +90,17 @@ function task2($operator, ...$items)
 function task3($rows, $cols)
 {
     if (is_int($rows) && is_int($cols) && $rows > 0 && $cols > 0) {
+        $tableStyle = 'table{border:3px double darkred;border-collapse:collapse;}';
+        $cellStyle = ' td{padding:8px;border:1px solid darkred;text-align: center}';
+        $style = "<style>" . $tableStyle . $cellStyle . "</style>";
         $caption = '<caption style="text-align:right;color:darkred;">Таблица умножения</caption>';
 
-        echo '<table style="border:3px double darkred;border-collapse:collapse;">';
+        echo '<table>' . $style;
 
         for ($tr = 1; $tr <= $rows; $tr++) {
             echo '<tr>';
             for ($td = 1; $td <= $cols; $td++) {
-                echo '<td style="padding:8px;border:1px solid darkred;text-align:center;">' . $tr * $td . '</td>';
+                echo '<td>' . $tr * $td . '</td>';
             }
             echo '</tr>';
         }
@@ -105,6 +109,12 @@ function task3($rows, $cols)
         echo 'Неверный формат исходных данных! Введите два целых положительных числа в качестве аргументов.';
     }
 }
+
+/**
+ * Задание #4 (выполняется после вебинара “ВСТРОЕННЫЕ ВОЗМОЖНОСТИ ЯЗЫКА”)
+ * Выведите информацию о текущей дате в формате 31.12.2016 23:59
+ * Выведите unixtime время соответствующее 24.02.2016 00:00:00.
+ */
 
 /**
  * Задание #5 (выполняется после вебинара “ВСТРОЕННЫЕ ВОЗМОЖНОСТИ ЯЗЫКА”)
@@ -122,3 +132,10 @@ function task5($search, $replace, $string)
 {
     return str_replace($search, $replace, $string);
 };
+
+ /**
+  * Задание #6 (выполняется после вебинара “ВСТРОЕННЫЕ ВОЗМОЖНОСТИ ЯЗЫКА”)
+  *
+  * Создайте файл test.txt средствами PHP. Поместите в него текст - “Hello again!”
+  * Напишите функцию, которая будет принимать имя файла, открывать файл и выводить содержимое на экран.
+  */
