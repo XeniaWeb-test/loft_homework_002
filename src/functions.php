@@ -74,14 +74,47 @@ function task2($operator, ...$items)
 }
 
 /**
+ * Задание #3 (Использование рекурсии не обязательно)
+ *
+ * Функция должна принимать два параметра – целые числа.
+ * Если в функцию передали 2 целых числа, то функция должна отобразить таблицу умножения
+ * размером со значения параметров, переданных в функцию.
+ * (Например если передано 8 и 8, то нарисовать от 1х1 до 8х8).
+ * Таблица должна быть выполнена с использованием тега <table>
+ * В остальных случаях выдавать корректную ошибку.
+ * @param int $rows
+ * @param int $cols
+ */
+
+function task3($rows, $cols)
+{
+    if (is_int($rows) && is_int($cols) && $rows > 0 && $cols > 0) {
+        $caption = '<caption style="text-align:right;color:darkred;">Таблица умножения</caption>';
+
+        echo '<table style="border:3px double darkred;border-collapse:collapse;">';
+
+        for ($tr = 1; $tr <= $rows; $tr++) {
+            echo '<tr>';
+            for ($td = 1; $td <= $cols; $td++) {
+                echo '<td style="padding:8px;border:1px solid darkred;text-align:center;">' . $tr * $td . '</td>';
+            }
+            echo '</tr>';
+        }
+        echo $caption . '</table>';
+    } else {
+        echo 'Неверный формат исходных данных! Введите два целых положительных числа в качестве аргументов.';
+    }
+}
+
+/**
  * Задание #5 (выполняется после вебинара “ВСТРОЕННЫЕ ВОЗМОЖНОСТИ ЯЗЫКА”)
  *
  * Дана строка: “Карл у Клары украл Кораллы”. Удалить из этой строки все заглавные буквы “К”.
  * Дана строка: “Две бутылки лимонада”. Заменить “Две”, на “Три”. По желанию дополнить задание.
  *
- * @param $search
- * @param $replace
- * @param $string
+ * @param string $search
+ * @param string $replace
+ * @param string $string
  * @return string
  */
 
