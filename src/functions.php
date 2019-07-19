@@ -23,7 +23,7 @@ function task1(array $arr, $glue = false)
 };
 
 /**
- * Задание #2
+ * Задание #2 Вариант 1
  * Функция должна принимать переменное число аргументов.
  * Первым аргументом обязательно должна быть строка, обозначающая арифметическое действие,
  * которое необходимо выполнить со всеми передаваемыми аргументами.
@@ -36,7 +36,7 @@ function task1(array $arr, $glue = false)
  * @return int|float
  */
 
-function task2($operator, ...$items)
+function task21($operator, ...$items)
 {
     $result = 0;
     switch ($operator) {
@@ -67,10 +67,66 @@ function task2($operator, ...$items)
             }
             break;
         default:
-            echo 'Неизвестное действие: ';
+            echo 'Неизвестное действие: результат не определен.';
             $result = null;
     }
-    echo 'результат = ' . $result . PHP_EOL;
+    if ($result) {
+        echo 'результат = ' . $result . PHP_EOL;
+    }
+    return $result;
+}
+/**
+ * Задание #2 Вариант 2
+ * Функция должна принимать переменное число аргументов.
+ * Первым аргументом обязательно должна быть строка, обозначающая арифметическое действие,
+ * которое необходимо выполнить со всеми передаваемыми аргументами.
+ * Остальные аргументы это целые и/или вещественные числа.
+ * Пример вызова: calcEverything(‘+’, 1, 2, 3, 5.2);
+ * Результат: 1 + 2 + 3 + 5.2 = 11.2
+ *
+ * @param string $operator
+ * @return int|float
+ */
+
+function task2($operator)
+{
+    $result = 0;
+    $items = func_get_args();
+    switch ($operator) {
+        case '+':
+            echo 'Сложение: ';
+            for ($i = 1; $i < count($items); $i++) {
+                $result += $items[$i];
+            }
+            break;
+        case '-':
+            echo 'Вычитание: ';
+            for ($i = 1; $i < count($items); $i++) {
+                $result -= $items[$i];
+            }
+            break;
+
+        case '*':
+            echo 'Умножение: ';
+            $result = 1;
+            for ($i = 1; $i < count($items); $i++) {
+                $result *= $items[$i];
+            }
+            break;
+        case '/':
+            echo 'Деление: ';
+            $result = 1;
+            for ($i = 1; $i < count($items); $i++) {
+                $result /= $items[$i];
+            }
+            break;
+        default:
+            echo 'Неизвестное действие: результат не определен.';
+            $result = null;
+    }
+    if ($result) {
+        echo 'результат = ' . $result . PHP_EOL;
+    }
     return $result;
 }
 
@@ -89,7 +145,8 @@ function task2($operator, ...$items)
 
 function task3($rows, $cols)
 {
-    if (is_int($rows) && is_int($cols) && $rows > 0 && $cols > 0) {
+//    if (is_int($rows) && is_int($cols) && $rows > 0 && $cols > 0) {
+    if ($rows > 0 && $cols > 0) {
         $tableStyle = 'table{border:3px double darkred;border-collapse:collapse;}';
         $cellStyle = ' td{padding:8px;border:1px solid darkred;text-align: center}';
         $style = "<style>" . $tableStyle . $cellStyle . "</style>";
@@ -115,6 +172,11 @@ function task3($rows, $cols)
  * Выведите информацию о текущей дате в формате 31.12.2016 23:59
  * Выведите unixtime время соответствующее 24.02.2016 00:00:00.
  */
+
+function task4(string $format)
+{
+    echo date ( $format);
+}
 
 /**
  * Задание #5 (выполняется после вебинара “ВСТРОЕННЫЕ ВОЗМОЖНОСТИ ЯЗЫКА”)
