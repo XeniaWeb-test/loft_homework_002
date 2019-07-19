@@ -36,7 +36,7 @@ function task1(array $arr, $glue = false)
  * @return int|float
  */
 
-function task21($operator, ...$items)
+function task2_1($operator, ...$items)
 {
     $result = 0;
     switch ($operator) {
@@ -169,13 +169,28 @@ function task3($rows, $cols)
 
 /**
  * Задание #4 (выполняется после вебинара “ВСТРОЕННЫЕ ВОЗМОЖНОСТИ ЯЗЫКА”)
+ * Вариант 1
  * Выведите информацию о текущей дате в формате 31.12.2016 23:59
- * Выведите unixtime время соответствующее 24.02.2016 00:00:00.
+ *
+ * @param string $format
  */
 
-function task4(string $format)
+function task4_1(string $format)
 {
-    echo date ( $format);
+    echo 'Текущая дата: ' . date($format) . PHP_EOL;
+}
+
+/**
+ * Задание #4
+ * Вариант 2
+ * Выведите unixtime время соответствующее 24.02.2016 00:00:00.
+ *
+ * @param string $searchDate
+ */
+
+function task4_2(string $searchDate)
+{
+    echo 'Этой дате соответствует Unixtime: ' . strtotime($searchDate) . PHP_EOL;
 }
 
 /**
@@ -195,9 +210,59 @@ function task5($search, $replace, $string)
     return str_replace($search, $replace, $string);
 };
 
- /**
-  * Задание #6 (выполняется после вебинара “ВСТРОЕННЫЕ ВОЗМОЖНОСТИ ЯЗЫКА”)
-  *
-  * Создайте файл test.txt средствами PHP. Поместите в него текст - “Hello again!”
-  * Напишите функцию, которая будет принимать имя файла, открывать файл и выводить содержимое на экран.
-  */
+/**
+ * Задание #6 (выполняется после вебинара “ВСТРОЕННЫЕ ВОЗМОЖНОСТИ ЯЗЫКА”)
+ * Часть 1
+ * Создайте файл test.txt средствами PHP. Поместите в него текст - “Hello again!”
+ *
+ * @param string $fileName Имя создаваемого файла
+ * @param string $content Текст для записи в файл
+ */
+
+function task6_1(string $fileName, string $content)
+{
+    // Проверяем существование файла с таким именем
+    if (file_exists($fileName)) {
+        echo 'Файл с таким именем уже существует!';
+        exit;
+    } else {
+        // Создаем файл и открываем его
+        $handle = fopen($fileName, 'wb');
+    }
+    if ($handle) {
+        echo 'Файл ' . $fileName . ' успешно создан';
+        // Записываем $content в открытый файл.
+        if (fwrite($handle, $content) === false) {
+            echo "Не могу произвести запись в файл.";
+            exit;
+        }
+        echo 'Запись в файл прошла успешно';
+        //Закрываем файл
+        fclose($handle);
+    } else {
+        echo 'Не удалось создать файл ' . $fileName;
+    }
+}
+
+/**
+ * Задание #6
+ * Часть 2
+ *
+ * Напишите функцию, которая будет принимать имя файла, открывать файл и выводить содержимое на экран.
+ *
+ *       (Другой способ чтения содержимого файла - сначала открыть, потом читать.
+ *       Файл закрывается автоматически функцией fpassthru() после чтения.
+ *       $handle = fopen($fileName, 'r');
+ *       echo fpassthru($handle);)
+ *
+ * @param string $fileName
+ */
+
+function task6_2($fileName)
+{
+    if (file_exists($fileName)) {
+        echo readfile($fileName);
+    } else {
+        echo 'Файл с таким именем не найден!';
+    }
+}
